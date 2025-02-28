@@ -6,7 +6,7 @@
 /*   By: ekashirs <ekashirs@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 11:40:44 by ekashirs          #+#    #+#             */
-/*   Updated: 2025/01/17 11:36:07 by ekashirs         ###   ########.fr       */
+/*   Updated: 2025/02/18 17:26:43 by ekashirs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	ft_check_malloc(char **arr, int position, size_t size)
 	arr[position] = malloc(size);
 	if (arr[position] == NULL)
 	{
-		while (i < position)
+		while (i <= position)
 		{
 			free(arr[i]);
 			i++;

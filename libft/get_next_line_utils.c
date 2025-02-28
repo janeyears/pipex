@@ -6,16 +6,32 @@
 /*   By: ekashirs <ekashirs@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:08:34 by ekashirs          #+#    #+#             */
-/*   Updated: 2025/01/28 14:42:09 by ekashirs         ###   ########.fr       */
+/*   Updated: 2025/02/21 14:57:28 by ekashirs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static int	ft_append_to_buffer(char **buffer, char *tmp_buff)
+{
+	char	*tmp_line;
+
+	tmp_line = ft_strjoin(*buffer, tmp_buff);
+	if (tmp_line == NULL)
+	{
+		free(tmp_buff);
+		free(*buffer);
+		*buffer = NULL;
+		return (1);
+	}
+	free(*buffer);
+	*buffer = tmp_line;
+	return (0);
+}
+
 void	ft_read_line(char **buffer, int fd)
 {
 	char	*tmp_buff;
-	char	*tmp_line;
 	int		bytes;
 
 	tmp_buff = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
@@ -31,23 +47,47 @@ void	ft_read_line(char **buffer, int fd)
 			return ;
 		}
 		tmp_buff[bytes] = '\0';
-		tmp_line = ft_strjoin(*buffer, tmp_buff);
-		free(*buffer);
-		*buffer = tmp_line;
+		if (ft_append_to_buffer(buffer, tmp_buff))
+			return ;
 		if (ft_strchr(tmp_buff, '\n'))
 			break ;
 	}
 	free(tmp_buff);
 }
 
-void	ft_extract_line(char **buffer, char **line, size_t len)
+static void	ft_remaining_data(char **buffer, size_t i, char **line)
 {
 	char	*remaining_data;
+
+	if ((*buffer)[i])
+	{
+		remaining_data = ft_strjoin(*buffer + i, "");
+		if (remaining_data == NULL)
+		{
+			free(*buffer);
+			*buffer = NULL;
+			free(line);
+			return ;
+		}
+		free(*buffer);
+		*buffer = remaining_data;
+		return ;
+	}
+	free(*buffer);
+	*buffer = NULL;
+}
+
+void	ft_extract_line(char **buffer, char **line, size_t len)
+{
 	size_t	i;
 
 	*line = ft_calloc(len + 2, sizeof(char));
 	if (!(*line))
+	{
+		free(*buffer);
+		*buffer = NULL;
 		return ;
+	}
 	i = 0;
 	while (i < len)
 	{
@@ -57,13 +97,5 @@ void	ft_extract_line(char **buffer, char **line, size_t len)
 	if ((*buffer)[i] == '\n')
 		(*line)[i++] = '\n';
 	(*line)[i] = '\0';
-	if ((*buffer)[i])
-	{
-		remaining_data = ft_strjoin(*buffer + i, "");
-		free(*buffer);
-		*buffer = remaining_data;
-		return ;
-	}
-	free(*buffer);
-	*buffer = NULL;
+	ft_remaining_data(buffer, i, line);
 }

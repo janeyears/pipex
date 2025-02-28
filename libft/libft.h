@@ -6,7 +6,7 @@
 /*   By: ekashirs <ekashirs@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 11:36:10 by ekashirs          #+#    #+#             */
-/*   Updated: 2025/01/17 11:46:41 by ekashirs         ###   ########.fr       */
+/*   Updated: 2025/02/18 17:51:49 by ekashirs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdarg.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 1
 # endif
 
 typedef struct s_list
@@ -49,7 +49,7 @@ char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *str, int search);
 char	*ft_strdup(const char *src);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char const *s1, const char *s2);
 size_t	ft_strlcat( char *dest, const char *src, size_t size );
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 size_t	ft_strlen(const char *s);
@@ -75,13 +75,13 @@ void	ft_extract_line(char **buffer, char **line, size_t len);
 void	ft_read_line(char **buffer, int fd);
 char	*ft_strchr(const char *str, int search);
 
-int	ft_printf(const char *input, ...);
-int	ft_check_type(va_list *args, const char input, size_t *count);
-int	ft_putchar(char c, size_t *count);
-int	ft_putstr(char *str, size_t *count);
-int	ft_putptr(unsigned long address, size_t *count);
-int	ft_puthex(unsigned long nbr, char c, size_t *count);
-int	ft_putnbr(int nb, size_t *count);
-int	ft_putuns(unsigned int nb, size_t *count);
+int		ft_printf(const char *input, ...);
+int		ft_check_type(va_list *args, const char input, size_t *count);
+int		ft_putchar(char c, size_t *count);
+int		ft_putstr(char *str, size_t *count);
+int		ft_putptr(unsigned long address, size_t *count);
+int		ft_puthex(unsigned long nbr, char c, size_t *count);
+int		ft_putnbr(int nb, size_t *count);
+int		ft_putuns(unsigned int nb, size_t *count);
 
 #endif
