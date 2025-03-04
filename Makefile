@@ -7,12 +7,11 @@ SRC_PATH = src/
 OBJ_PATH = obj/
 
 SRCS = $(SRC_PATH)/main.c \
-		
-		
-		
-		
-		
-		
+	$(SRC_PATH)/error_handling.c \
+	$(SRC_PATH)/misc.c \
+	$(SRC_PATH)/path_check.c \
+	$(SRC_PATH)/processes.c \
+
 SRC	= $(addprefix $(SRC_PATH), $(SRCS))
 OBJ = $(addprefix $(OBJ_PATH), $(notdir $(SRC:.c=.o)))
 
@@ -23,7 +22,6 @@ $(NAME): $(LIBFT) $(OBJ)
 
 $(LIBFT):
 	@$(MAKE) -C ./libft
-
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
