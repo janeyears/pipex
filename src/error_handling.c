@@ -6,7 +6,7 @@
 /*   By: ekashirs <ekashirs@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:47:01 by ekashirs          #+#    #+#             */
-/*   Updated: 2025/03/04 16:51:37 by ekashirs         ###   ########.fr       */
+/*   Updated: 2025/03/05 22:57:58 by ekashirs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	error_free(char *error, char *details, int exit_code, t_pipex *pipex_args)
 	ft_putstr_fd("\n", 2);
 	exit(exit_code);
 }
+
 void	split_free(char **array)
 {
 	int	i;
