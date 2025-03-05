@@ -6,7 +6,7 @@
 /*   By: ekashirs <ekashirs@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:40:48 by ekashirs          #+#    #+#             */
-/*   Updated: 2025/03/04 16:52:40 by ekashirs         ###   ########.fr       */
+/*   Updated: 2025/03/05 10:52:55 by ekashirs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	second_child(t_pipex *pipex_args, int pipe_fd[]);
 void	parent_process(int pipe_fd[], int pid_2 , t_pipex *pipex_args);
 char	*verify_cmd_path(char *cmd, char **envp);
 int		open_file(char *file, t_pipex *pipex_args);
-int		write_file(char *file, t_pipex *pipex_args);
+int		write_to_file(char *file, t_pipex *pipex_args);
 void	error_free(char *error, char *details, int exit_code, t_pipex *pipex_args);
 void	split_free(char **array);
 

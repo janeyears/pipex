@@ -6,7 +6,7 @@
 /*   By: ekashirs <ekashirs@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:00:57 by ekashirs          #+#    #+#             */
-/*   Updated: 2025/03/04 17:21:13 by ekashirs         ###   ########.fr       */
+/*   Updated: 2025/03/05 11:14:01 by ekashirs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	open_file(char *file, t_pipex *pipex_args)
 	return(fd);
 }
 
-int	write_file(char *file, t_pipex *pipex_args)
+int	write_to_file(char *file, t_pipex *pipex_args)
 {
 	int	fd;
 

@@ -6,7 +6,7 @@
 /*   By: ekashirs <ekashirs@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:10:54 by ekashirs          #+#    #+#             */
-/*   Updated: 2025/03/04 17:21:21 by ekashirs         ###   ########.fr       */
+/*   Updated: 2025/03/05 11:05:21 by ekashirs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ static void	execution(char *cmd, t_pipex *pipex_args)
 void	first_child(t_pipex *pipex_args, int pipe_fd[])
 {
 	int	fd;
-	
-	if(close(pipe_fd[0]) == -1)
+
+	if (close(pipe_fd[0]) == -1)
 		error_free(ERROR_CLOSE, "", 1, pipex_args);
-	if(dup2(pipe_fd[1], 1) == -1)
+	if (dup2(pipe_fd[1], 1) == -1)
 		error_free(ERROR_DUP, "", 1, pipex_args);
 	if (close(pipe_fd[1]) == -1)
 		error_free(ERROR_CLOSE, "", 1, pipex_args);
@@ -60,34 +60,18 @@ void	second_child(t_pipex *pipex_args, int pipe_fd[])
 {
 	int	fd;
 
-	ft_printf("i am in the beginning of second child process\n");
-
 	if (close(pipe_fd[1]) == -1)
 		error_free(ERROR_CLOSE, "", 1, pipex_args);
-	ft_printf("closed write end of pipe\n");
-
 	if (dup2(pipe_fd[0], 0) == -1)
 		error_free(ERROR_DUP, "", 1, pipex_args);
-	ft_printf("redirected stdin to pipe\n");
-
 	if (close(pipe_fd[0]) == -1)
 		error_free(ERROR_CLOSE, "", 1, pipex_args);
-	ft_printf("closed read end of pipe\n");
-
-	fd = write_file(pipex_args->outfile, pipex_args);
-	ft_printf("opened output file\n");
-
+	fd = write_to_file(pipex_args->outfile, pipex_args);
 	if (dup2(fd, 1) == -1)
 		error_free(ERROR_DUP, "", 1, pipex_args);
-	ft_printf("redirected stdout to output file\n");
-
 	if (close(fd) == -1)
 		error_free(ERROR_CLOSE, "", 1, pipex_args);
-	ft_printf("closed output file descriptor\n");
-
-	ft_printf("before execution\n");
 	execution(pipex_args->cmd2, pipex_args);
-	ft_printf("after execution (this should never print)\n");
 }
 
 void	parent_process(int pipe_fd[], int pid_2 , t_pipex *pipex_args)
@@ -109,7 +93,6 @@ void	parent_process(int pipe_fd[], int pid_2 , t_pipex *pipex_args)
 			status = exit_status;
 		child_nmb--;
 	}
-	ft_printf("i am in the end of parent process\n");
 	free(pipex_args);
 	exit(status);
 }
