@@ -6,7 +6,7 @@
 /*   By: ekashirs <ekashirs@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:52:47 by ekashirs          #+#    #+#             */
-/*   Updated: 2025/03/05 11:21:21 by ekashirs         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:29:43 by ekashirs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,21 @@
 
 static char	*get_path(char **envp)
 {
-	while(*envp)
+	while (*envp)
 	{
 		if (!ft_strncmp("PATH=", *envp, 5))
-			return(*envp + 5);
+			return (*envp + 5);
 		envp++;
 	}
 	return (NULL);
 }
-static char	*combine_path(char *ret_path, char *splited_path, char *cmd, size_t full_path_len)
+
+static char	*combine_path(char *ret_path, char *splited, char *cmd, size_t len)
 {
-		ft_strlcpy(ret_path, splited_path, full_path_len);
-		ft_strlcat(ret_path, "/", full_path_len);
-		ft_strlcat(ret_path, cmd, full_path_len);
-		return(ret_path);
+	ft_strlcpy(ret_path, splited, len);
+	ft_strlcat(ret_path, "/", len);
+	ft_strlcat(ret_path, cmd, len);
+	return (ret_path);
 }
 
 static char	*check_access(char **splited_paths, char *cmd)

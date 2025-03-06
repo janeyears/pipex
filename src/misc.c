@@ -6,7 +6,7 @@
 /*   By: ekashirs <ekashirs@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:00:57 by ekashirs          #+#    #+#             */
-/*   Updated: 2025/03/05 11:14:01 by ekashirs         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:58:30 by ekashirs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	open_file(char *file, t_pipex *pipex_args)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		error_free(ERROR_NOFILE, file, 127, pipex_args);
-	return(fd);
+	return (fd);
 }
 
 int	write_to_file(char *file, t_pipex *pipex_args)
@@ -34,6 +34,6 @@ int	write_to_file(char *file, t_pipex *pipex_args)
 	if (fd == -1)
 		error_free(ERROR_PERMISSION, file, 1, pipex_args);
 	if (access(file, F_OK) == 0 && access(file, W_OK) != 0)
-		error_free(ERROR_NOFILE, file, 127, pipex_args); // echo $?
-	return(fd);
+		error_free(ERROR_NOFILE, file, 127, pipex_args);
+	return (fd);
 }

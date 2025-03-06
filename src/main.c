@@ -6,7 +6,7 @@
 /*   By: ekashirs <ekashirs@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:40:58 by ekashirs          #+#    #+#             */
-/*   Updated: 2025/03/05 22:42:55 by ekashirs         ###   ########.fr       */
+/*   Updated: 2025/03/06 13:36:55 by ekashirs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ static void	process_managment(t_pipex *pipex_args, int pipe_fd[])
 	parent_process(pipe_fd, pid_2, pipex_args);
 }
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	int	pipe_fd[2];
+	int		pipe_fd[2];
 	t_pipex	*pipex_args;
 
 	pipex_args = NULL;
