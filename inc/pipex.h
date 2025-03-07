@@ -6,7 +6,7 @@
 /*   By: ekashirs <ekashirs@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:40:48 by ekashirs          #+#    #+#             */
-/*   Updated: 2025/03/07 13:29:54 by ekashirs         ###   ########.fr       */
+/*   Updated: 2025/03/07 16:14:32 by ekashirs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define ERROR_CLOSE "./pipex: close function has failed"
 # define ERROR_EXECVE "./pipex: execve function has failed"
 # define ERROR_SPLIT "./pipex: ft_split function has failed"
-# define ERROR_PERMISSION "./pipex: permission denied "
+# define ERROR_PERMISSION "./pipex: permission denied:"
 # define ERROR_NOFILE "./pipex: no such file or directory: "
 
 typedef struct s_data

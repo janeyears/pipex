@@ -15,7 +15,7 @@ SRCS = $(SRC_PATH)/main.c \
 SRC	= $(addprefix $(SRC_PATH), $(SRCS))
 OBJ = $(addprefix $(OBJ_PATH), $(notdir $(SRC:.c=.o)))
 
-all:	$(NAME) 
+all:	$(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT)
@@ -27,8 +27,8 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $^
 
-clean: 
-	@$(MAKE) -C ./libft clean 
+clean:
+	@$(MAKE) -C ./libft clean
 	@rm -rf $(OBJ_PATH)
 
 fclean: clean

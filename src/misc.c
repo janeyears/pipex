@@ -6,7 +6,7 @@
 /*   By: ekashirs <ekashirs@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:00:57 by ekashirs          #+#    #+#             */
-/*   Updated: 2025/03/07 13:38:53 by ekashirs         ###   ########.fr       */
+/*   Updated: 2025/03/07 16:10:34 by ekashirs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*arg_check(char **cmd_args, t_data *pipex_args, char *cmd)
 	if (!cmd_args[0])
 	{
 		free(cmd_args);
-		error_free(ERROR_CMD, "", 127, pipex_args);
+		error_free(ERROR_CMD, cmd_path, 127, pipex_args);
 	}
 	if (cmd[0] == '/')
 		cmd_path = access_flag(cmd_args, pipex_args, 1, cmd);

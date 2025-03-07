@@ -6,7 +6,7 @@
 /*   By: ekashirs <ekashirs@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:40:58 by ekashirs          #+#    #+#             */
-/*   Updated: 2025/03/07 13:39:06 by ekashirs         ###   ########.fr       */
+/*   Updated: 2025/03/07 16:08:28 by ekashirs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 static void	struct_init(t_data *pipex_args, char **argv, char **envp)
 {
-	if (!argv[2] || argv[2][0] == '\0' || !argv[3] || argv[3][0] == '\0')
-		error_free(ERROR_PERMISSION, "", 127, pipex_args);
 	pipex_args->infile = argv[1];
 	pipex_args->cmd1 = argv[2];
 	pipex_args->cmd2 = argv[3];

@@ -6,7 +6,7 @@
 /*   By: ekashirs <ekashirs@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:10:54 by ekashirs          #+#    #+#             */
-/*   Updated: 2025/03/07 14:38:09 by ekashirs         ###   ########.fr       */
+/*   Updated: 2025/03/07 16:14:53 by ekashirs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	execution(char *cmd, t_data *pipex_args)
 	if (cmd_path == NULL)
 	{
 		split_free(cmd_args);
-		error_free(ERROR_CMD, "", 127, pipex_args);
+		error_free(ERROR_CMD, cmd, 127, pipex_args);
 	}
 	if (execve(cmd_path, cmd_args, pipex_args->env_pointer) == -1)
 	{
@@ -57,6 +57,8 @@ void	first_child(t_data *pipex_args, int pipe_fd[])
 		error_free(ERROR_DUP, "", 1, pipex_args);
 	if (close(fd) == -1)
 		error_free(ERROR_CLOSE, "", 1, pipex_args);
+	if (pipex_args->cmd1[0] == '\0')
+		error_free(ERROR_PERMISSION, "", 126, pipex_args);
 	execution(pipex_args->cmd1, pipex_args);
 }
 
@@ -75,6 +77,8 @@ void	second_child(t_data *pipex_args, int pipe_fd[])
 		error_free(ERROR_DUP, "", 1, pipex_args);
 	if (close(fd) == -1)
 		error_free(ERROR_CLOSE, "", 1, pipex_args);
+	if (pipex_args->cmd2[0] == '\0')
+		error_free(ERROR_PERMISSION, "", 126, pipex_args);
 	execution(pipex_args->cmd2, pipex_args);
 }
 
