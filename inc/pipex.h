@@ -6,7 +6,7 @@
 /*   By: ekashirs <ekashirs@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:40:48 by ekashirs          #+#    #+#             */
-/*   Updated: 2025/03/07 16:14:32 by ekashirs         ###   ########.fr       */
+/*   Updated: 2025/03/07 16:36:58 by ekashirs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define ERROR_PIPE "./pipex: pipe creation failed"
 # define ERROR_CALLOC "./pipex: ft_calloc function has failed"
 # define ERROR_FORK "./pipex: fork failed"
-# define ERROR_CMD "./pipex: command not found: "
+# define ERROR_CMD "./pipex: command not found:"
 # define ERROR_DUP "./pipex: dup2 function has failed"
 # define ERROR_CLOSE "./pipex: close function has failed"
 # define ERROR_EXECVE "./pipex: execve function has failed"

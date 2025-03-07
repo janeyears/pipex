@@ -6,7 +6,7 @@
 /*   By: ekashirs <ekashirs@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:47:01 by ekashirs          #+#    #+#             */
-/*   Updated: 2025/03/07 13:34:09 by ekashirs         ###   ########.fr       */
+/*   Updated: 2025/03/07 16:50:01 by ekashirs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	error_free(char *error, char *details, int code, t_data *pipex_args)
 	if (pipex_args)
 		free(pipex_args);
 	write(2, error, ft_strlen(error));
-	write(2, details, ft_strlen(details));
+	if (details && ft_strlen(details) > 0)
+		write(2, details, ft_strlen(details));
 	write(2, "\n", 1);
 	exit(code);
 }
