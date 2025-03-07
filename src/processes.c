@@ -6,15 +6,14 @@
 /*   By: ekashirs <ekashirs@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:10:54 by ekashirs          #+#    #+#             */
-/*   Updated: 2025/03/06 17:00:00 by ekashirs         ###   ########.fr       */
+/*   Updated: 2025/03/07 14:38:09 by ekashirs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 #include <sys/wait.h>
-#include <stdlib.h>
 
-static void	execution(char *cmd, t_pipex *pipex_args)
+static void	execution(char *cmd, t_data *pipex_args)
 {
 	char	*cmd_path;
 	char	**cmd_args;
@@ -22,53 +21,20 @@ static void	execution(char *cmd, t_pipex *pipex_args)
 	cmd_args = ft_split(cmd, ' ');
 	if (cmd_args == NULL)
 		error_free(ERROR_SPLIT, "", 127, pipex_args);
-	if (!cmd_args[0])
-	{
-		free(cmd_args);
-		error_free(ERROR_CMD, "", 127, pipex_args);
-	}
-	if (cmd[0] == '/')
-	{
-		cmd_path = cmd_args[0];
-		if (access(cmd_path, X_OK) != 0)
-		{
-			free(cmd_args);
-			error_free(ERROR_NOFILE, cmd_path, 127, pipex_args);
-		}
-	}
-	else if ((cmd[0] == '.' && cmd[1] == '/'))
-	{
-		cmd_path = cmd_args[0];
-		if (access(cmd_path, X_OK) != 0)
-		{
-			free(cmd_args);
-			error_free(ERROR_PERMISSION, cmd_path, 126, pipex_args);
-		}
-	}
+	if (!cmd_args[0] || cmd[0] == '/' || cmd[0] == '.')
+		cmd_path = arg_check(cmd_args, pipex_args, cmd);
 	else if (ft_strchr(cmd_args[0], '/'))
-	{
-		cmd_path = cmd_args[0];
-		if (access(cmd_path, F_OK) == -1)
-		{
-			free(cmd_args);
-			error_free(ERROR_NOFILE, cmd_path, 127, pipex_args);
-		}
-		else if (access(cmd_path, X_OK) != 0)
-		{
-			free(cmd_args);
-			error_free(ERROR_PERMISSION, cmd_path, 126, pipex_args);
-		}
-	}
+		cmd_path = access_flag(cmd_args, pipex_args, 1, cmd);
 	else
 		cmd_path = verify_cmd_path(cmd_args[0], pipex_args->env_pointer);
 	if (cmd_path == NULL)
 	{
-		free(cmd_args);
+		split_free(cmd_args);
 		error_free(ERROR_CMD, "", 127, pipex_args);
 	}
 	if (execve(cmd_path, cmd_args, pipex_args->env_pointer) == -1)
 	{
-		free(cmd_args);
+		split_free(cmd_args);
 		free(cmd_path);
 		error_free(ERROR_EXECVE, "", 1, pipex_args);
 	}
@@ -76,7 +42,7 @@ static void	execution(char *cmd, t_pipex *pipex_args)
 	free(cmd_path);
 }
 
-void	first_child(t_pipex *pipex_args, int pipe_fd[])
+void	first_child(t_data *pipex_args, int pipe_fd[])
 {
 	int	fd;
 
@@ -94,7 +60,7 @@ void	first_child(t_pipex *pipex_args, int pipe_fd[])
 	execution(pipex_args->cmd1, pipex_args);
 }
 
-void	second_child(t_pipex *pipex_args, int pipe_fd[])
+void	second_child(t_data *pipex_args, int pipe_fd[])
 {
 	int	fd;
 
@@ -112,7 +78,7 @@ void	second_child(t_pipex *pipex_args, int pipe_fd[])
 	execution(pipex_args->cmd2, pipex_args);
 }
 
-void	parent_process(int pipe_fd[], int pid_2, t_pipex *pipex_args)
+void	parent_process(int pipe_fd[], int pid_2, t_data *pipex_args)
 {
 	int	child_nmb;
 	int	pid;

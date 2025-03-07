@@ -6,15 +6,14 @@
 /*   By: ekashirs <ekashirs@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:40:58 by ekashirs          #+#    #+#             */
-/*   Updated: 2025/03/06 13:36:55 by ekashirs         ###   ########.fr       */
+/*   Updated: 2025/03/07 13:39:06 by ekashirs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include <stdlib.h>
 #include <sys/types.h>
 
-static void	struct_init(t_pipex *pipex_args, char **argv, char **envp)
+static void	struct_init(t_data *pipex_args, char **argv, char **envp)
 {
 	if (!argv[2] || argv[2][0] == '\0' || !argv[3] || argv[3][0] == '\0')
 		error_free(ERROR_PERMISSION, "", 127, pipex_args);
@@ -25,7 +24,7 @@ static void	struct_init(t_pipex *pipex_args, char **argv, char **envp)
 	pipex_args->env_pointer = envp;
 }
 
-static void	process_managment(t_pipex *pipex_args, int pipe_fd[])
+static void	process_managment(t_data *pipex_args, int pipe_fd[])
 {
 	pid_t	pid_1;
 	pid_t	pid_2;
@@ -46,12 +45,12 @@ static void	process_managment(t_pipex *pipex_args, int pipe_fd[])
 int	main(int argc, char **argv, char **envp)
 {
 	int		pipe_fd[2];
-	t_pipex	*pipex_args;
+	t_data	*pipex_args;
 
 	pipex_args = NULL;
 	if (argc != 5)
 		error_free(ERROR_ARGS, "", 1, pipex_args);
-	pipex_args = ft_calloc(1, sizeof(t_pipex));
+	pipex_args = ft_calloc(1, sizeof(t_data));
 	if (pipex_args == NULL)
 		error_free(ERROR_CALLOC, "", 1, pipex_args);
 	struct_init(pipex_args, argv, envp);

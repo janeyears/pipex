@@ -6,13 +6,11 @@
 /*   By: ekashirs <ekashirs@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:52:47 by ekashirs          #+#    #+#             */
-/*   Updated: 2025/03/06 16:29:43 by ekashirs         ###   ########.fr       */
+/*   Updated: 2025/03/07 14:38:40 by ekashirs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include <sys/wait.h>
-#include <stdlib.h>
 
 static char	*get_path(char **envp)
 {
